@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, MapPin, Calendar, Maximize2, Tag } from "lucide-react";
+import { ArrowLeft, ArrowRight, MapPin, Calendar, Maximize2, Tag, Download, FileText } from "lucide-react";
 import { projects } from "@/data/projects";
 
 interface Props {
@@ -239,6 +239,51 @@ export default async function ProjectDetailPage({ params }: Props) {
           ))}
         </div>
       </section>
+
+      {/* Downloadable Files Section */}
+      {project.downloadableFiles && project.downloadableFiles.length > 0 && (
+        <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 mb-24">
+          <div className="mb-10 pb-6 border-b border-borderSubtle">
+            <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-gold block mb-2">
+              Technical Documents
+            </span>
+            <h2 className="font-serif text-4xl sm:text-5xl text-foreground font-normal">
+              Drawing Packages
+            </h2>
+            <p className="text-sm text-secondary font-light mt-2">
+              Download the complete AutoCAD drawing sets for this project.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {project.downloadableFiles.map((file, idx) => (
+              <a
+                key={idx}
+                href={file.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between p-5 border border-borderSubtle hover:border-gold bg-background hover:bg-foreground/[0.02] transition-all duration-300"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-gold/10 border border-gold/20 flex items-center justify-center group-hover:bg-gold group-hover:border-gold transition-all duration-300">
+                    <FileText className="w-5 h-5 text-gold group-hover:text-white transition-colors" />
+                  </div>
+                  <div>
+                    <span className="block text-sm font-serif text-foreground font-medium group-hover:text-gold transition-colors">
+                      {file.name}
+                    </span>
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-secondary">
+                      {file.fileType}{file.size ? ` · ${file.size}` : ''}
+                    </span>
+                  </div>
+                </div>
+
+                <Download className="w-4 h-4 text-secondary group-hover:text-gold transition-colors" />
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Next Project Footer Bar */}
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-16 border-t border-borderSubtle">

@@ -42,6 +42,12 @@ export interface Project {
   };
   materials: ProjectMaterial[];
   gallery: ProjectImage[];
+  downloadableFiles?: {
+    name: string;
+    url: string;
+    fileType: string;
+    size?: string;
+  }[];
   featured: boolean;
   gridSpan?: 'full' | 'half' | 'offset-left' | 'offset-right';
 }

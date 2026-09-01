@@ -1,13 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight, FileText, X, Download, Maximize2 } from "lucide-react";
 import { designerProfile } from "@/data/profile";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 
 export default function HeroSection() {
+  const [cvModalOpen, setCvModalOpen] = useState(false);
+
   return (
     <section className="relative w-full min-h-[92vh] sm:min-h-screen flex flex-col justify-between pt-32 pb-12 px-6 sm:px-8 lg:px-12 overflow-hidden bg-background">
       {/* Background Architectural Image with Slow Settle Animation */}
@@ -75,13 +78,15 @@ export default function HeroSection() {
               <ArrowDown className="w-3.5 h-3.5" />
             </Link>
 
-            <Link
-              href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3.5 border border-foreground/30 hover:border-gold hover:text-gold text-xs uppercase tracking-[0.2em] font-medium transition-colors duration-300"
+            {/* View CV / Resume Button */}
+            <button
+              onClick={() => setCvModalOpen(true)}
+              className="group inline-flex items-center gap-2 px-6 py-3.5 border border-foreground/30 hover:border-gold hover:text-gold text-xs uppercase tracking-[0.2em] font-medium transition-colors duration-300 bg-background/40 backdrop-blur-sm"
             >
-              <span>Get in Touch</span>
+              <FileText className="w-3.5 h-3.5 text-gold group-hover:scale-110 transition-transform" />
+              <span>View Curriculum Vitae (CV)</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
+            </button>
           </motion.div>
         </motion.div>
       </div>
@@ -115,6 +120,90 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
+
+      {/* Fullscreen CV Preview Modal */}
+      <AnimatePresence>
+        {cvModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col justify-between p-4 sm:p-8"
+          >
+            {/* Modal Header Bar */}
+            <div className="max-w-6xl mx-auto w-full flex items-center justify-between pb-4 border-b border-white/10 text-white">
+              <div className="flex items-center gap-3">
+                <span className="w-2 h-2 rounded-full bg-gold" />
+                <span className="font-serif text-xl sm:text-2xl text-background font-medium">
+                  Curriculum Vitae — Walaa Khalil Al-Adrah
+                </span>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <a
+                  href="/mycv/walaakhalil.jpeg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-gold text-white text-xs font-mono uppercase tracking-widest transition-colors"
+                >
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  <span>Open Full Size</span>
+                </a>
+
+                <a
+                  href="/mycv/walaakhalil.jpeg"
+                  download="Walaa_Khalil_Al-Adrah_CV.jpeg"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-gold hover:bg-gold-light text-white text-xs font-mono uppercase tracking-widest transition-colors"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Download</span>
+                </a>
+
+                <button
+                  onClick={() => setCvModalOpen(false)}
+                  className="p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-colors"
+                  aria-label="Close CV Modal"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal CV Image Body */}
+            <div className="relative w-full max-w-4xl mx-auto my-auto h-[75vh] sm:h-[80vh] overflow-auto flex items-center justify-center p-2">
+              <div className="relative w-full h-full max-w-2xl bg-white shadow-2xl border border-white/20">
+                <Image
+                  src="/mycv/walaakhalil.jpeg"
+                  alt="Walaa Khalil Al-Adrah Curriculum Vitae"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 800px"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* Modal Mobile Actions Footer */}
+            <div className="sm:hidden flex items-center justify-center gap-3 pt-3 border-t border-white/10">
+              <a
+                href="/mycv/walaakhalil.jpeg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-white/10 text-white text-xs font-mono uppercase tracking-wider"
+              >
+                Open Full Size
+              </a>
+              <a
+                href="/mycv/walaakhalil.jpeg"
+                download="Walaa_Khalil_Al-Adrah_CV.jpeg"
+                className="px-4 py-2 bg-gold text-white text-xs font-mono uppercase tracking-wider"
+              >
+                Download
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

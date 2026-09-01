@@ -1,8 +1,12 @@
 export type ProjectCategory = 
+  | 'Interior Design'
+  | 'Student Projects'
+  | 'Working Drawing'
+  | '3D Visualization'
+  | 'Furniture Design'
   | 'Residential Interior'
   | 'Commercial Interior'
-  | 'Outdoor & Hospitality'
-  | '3D Visualization';
+  | 'Outdoor & Hospitality';
 
 export interface ProjectMaterial {
   name: string;

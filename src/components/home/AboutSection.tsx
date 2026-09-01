@@ -36,11 +36,11 @@ export default function AboutSection() {
           >
             <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden bg-[#E7E2D8] border border-borderSubtle">
               <Image
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85"
+                src="/mycv/walaakhalil.jpeg"
                 alt="Walaa Khalil Al-Adrah - Interior Designer"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-cover object-top filter grayscale-[20%] contrast-[1.03]"
+                className="object-cover object-top filter grayscale-[10%] contrast-[1.02]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
 

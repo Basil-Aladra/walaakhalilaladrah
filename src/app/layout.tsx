@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Inter, Cairo, Tajawal } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import ScrollToTop from "@/components/layout/ScrollToTop";
 import { LanguageProvider } from "@/context/LanguageContext";
 
 const cormorant = Cormorant_Garamond({
@@ -77,6 +78,7 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-grow">{children}</main>
           <Footer />
+          <ScrollToTop />
         </LanguageProvider>
       </body>
     </html>

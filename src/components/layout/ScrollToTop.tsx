@@ -52,14 +52,13 @@ export default function ScrollToTop() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className={`fixed bottom-6 sm:bottom-8 ${
-            isRTL ? "left-6 sm:left-8" : "right-6 sm:right-8"
-          } z-40`}
+          className={`fixed bottom-6 sm:bottom-8 ${isRTL ? "left-6 sm:left-8" : "right-6 sm:right-8"
+            } z-40`}
         >
           <button
             onClick={scrollToTop}
             aria-label={language === "ar" ? "الصعود إلى أعلى الصفحة" : "Scroll to top of page"}
-            className="group relative flex items-center justify-center w-12 h-12 sm:w-13 sm:h-13 bg-background/90 hover:bg-[#1B1714] text-foreground hover:text-white backdrop-blur-md border border-borderSubtle hover:border-[#1B1714] shadow-xl transition-all duration-300 focus:outline-none"
+            className="group relative flex items-center justify-center w-12 h-12 sm:w-13 sm:h-13 bg-background/90 hover:bg-[#1B1714] text-foreground hover:text-white backdrop-blur-md border border-borderSubtle hover:border-[#1B1714] shadow-xl transition-all duration-300 focus:outline-none rounded-full"
           >
             {/* Circular Progress Ring */}
             <svg
@@ -94,9 +93,8 @@ export default function ScrollToTop() {
 
             {/* Hover Tooltip */}
             <span
-              className={`absolute -top-9 ${
-                isRTL ? "right-1/2 translate-x-1/2" : "left-1/2 -translate-x-1/2"
-              } px-2.5 py-1 bg-[#1B1714] text-white text-[10px] font-mono uppercase tracking-widest pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-md`}
+              className={`absolute -top-9 ${isRTL ? "right-1/2 translate-x-1/2" : "left-1/2 -translate-x-1/2"
+                } px-2.5 py-1 bg-[#1B1714] text-white text-[10px] font-mono uppercase tracking-widest pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-md`}
             >
               {language === "ar" ? "للأعلى" : "Top"}
             </span>

@@ -143,39 +143,42 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.98 }}
                     transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                    className={`absolute top-full ${isRTL ? "right-0" : "left-0"} mt-3 w-84 bg-background/95 backdrop-blur-xl border border-borderSubtle shadow-2xl p-3 z-50 rounded-none bg-noise`}
+                    className={`absolute top-full ${isRTL ? "right-0" : "left-0"} mt-3 w-[420px] sm:w-[450px] bg-background/98 backdrop-blur-2xl border border-borderSubtle shadow-2xl p-4 z-50 rounded-none bg-noise`}
                   >
-                    <div className="px-3 pt-2 pb-2 border-b border-borderSubtle mb-2">
-                      <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-gold block">
+                    <div className="px-3 pt-1 pb-3 border-b border-borderSubtle mb-2 flex items-center justify-between">
+                      <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-gold font-medium">
                         {t.nav.portfolioNavigation}
+                      </span>
+                      <span className="text-[10px] font-mono text-secondary/60 uppercase">
+                        6 {language === "ar" ? "أقسام" : "Categories"}
                       </span>
                     </div>
 
-                    <div className="flex flex-col space-y-1">
+                    <div className="flex flex-col space-y-1.5">
                       {projectSubmenu.map((item) => (
                         <Link
                           key={item.name}
                           href={item.href}
                           onClick={() => setDesktopDropdownOpen(false)}
-                          className={`group/item flex items-center justify-between p-2.5 hover:bg-foreground/[0.04] transition-all duration-200 border-transparent hover:border-gold ${
+                          className={`group/item flex items-center justify-between p-3 hover:bg-foreground/[0.04] transition-all duration-200 border-transparent hover:border-gold ${
                             isRTL ? "border-r-2" : "border-l-2"
                           }`}
                         >
-                          <div>
-                            <div className="flex items-center gap-2">
-                              <span className="text-[10px] font-mono text-gold/80 font-light">
-                                {item.number}
-                              </span>
-                              <span className="text-xs font-serif text-foreground font-medium group-hover/item:text-gold transition-colors">
+                          <div className="flex items-start gap-3.5">
+                            <span className="w-6 h-6 rounded-full bg-foreground/[0.04] group-hover/item:bg-gold/15 text-[11px] font-mono text-gold flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors">
+                              {item.number}
+                            </span>
+                            <div>
+                              <span className="text-sm font-serif text-foreground font-medium group-hover/item:text-gold transition-colors block leading-tight">
                                 {item.name}
                               </span>
+                              <span className="text-xs text-secondary font-light block mt-1 leading-snug">
+                                {item.desc}
+                              </span>
                             </div>
-                            <span className={`text-[10px] text-secondary font-light block ${isRTL ? "pr-5" : "pl-5"} mt-0.5`}>
-                              {item.desc}
-                            </span>
                           </div>
 
-                          <ArrowIcon className={`w-3.5 h-3.5 text-gold opacity-0 ${isRTL ? "translate-x-2" : "-translate-x-2"} group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-200`} />
+                          <ArrowIcon className={`w-4 h-4 text-gold opacity-0 ${isRTL ? "translate-x-2" : "-translate-x-2"} group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-200 flex-shrink-0`} />
                         </Link>
                       ))}
                     </div>

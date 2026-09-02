@@ -143,13 +143,14 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.98 }}
                     transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                    className={`absolute top-full ${isRTL ? "right-0" : "left-0"} mt-3 w-[420px] sm:w-[450px] bg-background/98 backdrop-blur-2xl border border-borderSubtle shadow-2xl p-4 z-50 rounded-none bg-noise`}
+                    className={`absolute top-full ${isRTL ? "right-0" : "left-0"} mt-3 w-[420px] sm:w-[460px] bg-[#ede8e1] border border-[#1B1714]/15 shadow-2xl p-4 z-[100] rounded-none`}
+                    style={{ backgroundColor: "#ede8e1" }}
                   >
-                    <div className="px-3 pt-1 pb-3 border-b border-borderSubtle mb-2 flex items-center justify-between">
+                    <div className="px-3 pt-1 pb-3 border-b border-[#1B1714]/10 mb-2 flex items-center justify-between">
                       <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-gold font-medium">
                         {t.nav.portfolioNavigation}
                       </span>
-                      <span className="text-[10px] font-mono text-secondary/60 uppercase">
+                      <span className="text-[10px] font-mono text-secondary/70 uppercase">
                         6 {language === "ar" ? "أقسام" : "Categories"}
                       </span>
                     </div>
@@ -160,12 +161,12 @@ export default function Navbar() {
                           key={item.name}
                           href={item.href}
                           onClick={() => setDesktopDropdownOpen(false)}
-                          className={`group/item flex items-center justify-between p-3 hover:bg-foreground/[0.04] transition-all duration-200 border-transparent hover:border-gold ${
+                          className={`group/item flex items-center justify-between p-3 hover:bg-[#1B1714]/[0.06] transition-all duration-200 border-transparent hover:border-gold ${
                             isRTL ? "border-r-2" : "border-l-2"
                           }`}
                         >
                           <div className="flex items-start gap-3.5">
-                            <span className="w-6 h-6 rounded-full bg-foreground/[0.04] group-hover/item:bg-gold/15 text-[11px] font-mono text-gold flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors">
+                            <span className="w-6 h-6 rounded-full bg-[#1B1714]/[0.06] group-hover/item:bg-gold/20 text-[11px] font-mono text-gold flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors">
                               {item.number}
                             </span>
                             <div>

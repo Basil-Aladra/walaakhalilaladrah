@@ -9,6 +9,7 @@ import { ArrowUpRight, ArrowLeft, ArrowRight } from "lucide-react";
 import { projects } from "@/data/projects";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { useLanguage } from "@/context/LanguageContext";
+import Watermark from "@/components/ui/Watermark";
 
 const categoryKeys = [
   { key: "All", en: "All", ar: "جميع المشاريع" },
@@ -133,6 +134,8 @@ function ProjectsContent() {
                         <ArrowOpenIcon className={`w-3.5 h-3.5 ${isRTL ? "rotate-[-90deg]" : ""}`} />
                       </div>
                     </div>
+
+                    <Watermark position="bottom-right" />
                   </div>
 
                   <div className="pt-6">

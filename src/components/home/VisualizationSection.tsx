@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Eye, Layers, Sun, Camera } from "lucide-react";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { useLanguage } from "@/context/LanguageContext";
+import Watermark from "@/components/ui/Watermark";
 
 const renderStudies = [
   {
@@ -99,6 +100,8 @@ export default function VisualizationSection() {
               <Eye className="w-3.5 h-3.5 text-gold-light" />
               <span>{language === "ar" ? "دراسة إظهار معماري" : "3D Visualization Study"} · 0{activeIndex + 1}</span>
             </div>
+
+            <Watermark position="bottom-right" />
           </div>
 
           {/* Technical Metadata Bar */}

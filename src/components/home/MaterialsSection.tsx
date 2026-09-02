@@ -6,6 +6,7 @@ import Image from "next/image";
 import { materialsShowcase } from "@/data/profile";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { useLanguage } from "@/context/LanguageContext";
+import Watermark from "@/components/ui/Watermark";
 
 export default function MaterialsSection() {
   const [selectedMaterial, setSelectedMaterial] = useState(materialsShowcase[0]);
@@ -97,6 +98,7 @@ export default function MaterialsSection() {
                   {language === "ar" ? (selectedMaterial.nameAr || selectedMaterial.name) : selectedMaterial.name}
                 </span>
               </div>
+              <Watermark position="top-right" />
             </div>
 
             <div className="space-y-4">

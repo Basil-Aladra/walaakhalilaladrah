@@ -7,6 +7,7 @@ import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/projects";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { useLanguage } from "@/context/LanguageContext";
+import Watermark from "@/components/ui/Watermark";
 
 export default function SelectedWorks() {
   const { t, language, isRTL } = useLanguage();
@@ -78,6 +79,8 @@ export default function SelectedWorks() {
                       <ArrowUpRight className={`w-3.5 h-3.5 ${isRTL ? "rotate-[-90deg]" : ""}`} />
                     </div>
                   </div>
+
+                  <Watermark position="top-right" />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6 pt-6">
@@ -133,6 +136,7 @@ export default function SelectedWorks() {
                         {projects[1].number}
                       </span>
                     </div>
+                    <Watermark position="bottom-right" />
                   </div>
 
                   <div className="pt-6">
@@ -176,6 +180,7 @@ export default function SelectedWorks() {
                         {projects[2].number}
                       </span>
                     </div>
+                    <Watermark position="bottom-right" />
                   </div>
 
                   <div className="pt-6">
@@ -222,6 +227,7 @@ export default function SelectedWorks() {
                         {projects[3].number}
                       </span>
                     </div>
+                    <Watermark position="bottom-right" />
                   </div>
 
                   <div className="pt-6">
@@ -265,6 +271,7 @@ export default function SelectedWorks() {
                         {projects[4].number}
                       </span>
                     </div>
+                    <Watermark position="bottom-right" />
                   </div>
 
                   <div className="pt-6">

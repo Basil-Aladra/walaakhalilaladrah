@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, MapPin, Calendar, Maximize2, Tag, Download, FileText } from "lucide-react";
 import { Project } from "@/lib/types";
 import { useLanguage } from "@/context/LanguageContext";
+import Watermark from "@/components/ui/Watermark";
 
 interface Props {
   project: Project;
@@ -115,6 +116,7 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
             sizes="100vw"
             className="object-cover object-center"
           />
+          <Watermark position="bottom-right" />
         </div>
       </div>
 
@@ -231,6 +233,7 @@ export default function ProjectDetailClient({ project, nextProject }: Props) {
                     sizes="100vw"
                     className="object-cover object-center"
                   />
+                  <Watermark position="bottom-right" />
                 </div>
                 {caption && (
                   <figcaption className="text-xs text-secondary font-mono tracking-wider flex items-center justify-between pt-1">

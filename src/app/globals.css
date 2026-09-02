@@ -29,6 +29,29 @@
     selection-color: #FFFFFF;
   }
 
+  /* Arabic Typography Polish */
+  html[dir="rtl"] body {
+    font-family: var(--font-tajawal), sans-serif;
+  }
+
+  html[dir="rtl"] .font-serif {
+    font-family: var(--font-cairo), serif;
+    letter-spacing: normal !important;
+  }
+
+  html[dir="rtl"] .font-sans {
+    font-family: var(--font-tajawal), sans-serif;
+    letter-spacing: normal !important;
+  }
+
+  html[dir="rtl"] .tracking-widest,
+  html[dir="rtl"] .tracking-wider,
+  html[dir="rtl"] .tracking-\[0\.25em\],
+  html[dir="rtl"] .tracking-\[0\.2em\],
+  html[dir="rtl"] .tracking-\[0\.18em\] {
+    letter-spacing: 0.02em !important;
+  }
+
   ::selection {
     background-color: #A68A62;
     color: #FFFFFF;

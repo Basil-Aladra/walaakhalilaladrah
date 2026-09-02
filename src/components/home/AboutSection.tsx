@@ -4,8 +4,13 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { designerProfile } from "@/data/profile";
 import { fadeUp, staggerContainer } from "@/lib/motion";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function AboutSection() {
+  const { t, language, isRTL } = useLanguage();
+
+  const pillars = language === "ar" ? designerProfile.about.pillarsAr : designerProfile.about.pillars;
+
   return (
     <section id="about" className="py-24 sm:py-36 px-6 sm:px-8 lg:px-12 bg-background relative overflow-hidden border-b border-borderSubtle bg-noise">
       <div className="max-w-7xl mx-auto">
@@ -18,10 +23,10 @@ export default function AboutSection() {
           className="mb-16"
         >
           <motion.span variants={fadeUp} className="text-[11px] font-mono tracking-[0.25em] uppercase text-gold block mb-3">
-            02 — Background & Practice
+            02 — {t.about.badge}
           </motion.span>
           <motion.h2 variants={fadeUp} className="font-serif text-4xl sm:text-6xl text-foreground font-normal tracking-tight">
-            {designerProfile.about.title}
+            {language === "ar" ? designerProfile.about.titleAr : designerProfile.about.title}
           </motion.h2>
         </motion.div>
 
@@ -37,7 +42,7 @@ export default function AboutSection() {
             <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden bg-[#E7E2D8] border border-borderSubtle">
               <Image
                 src="/mycv/walaakhalil.jpeg"
-                alt="Walaa Khalil Al-Adrah - Interior Designer"
+                alt={language === "ar" ? designerProfile.arabicName : designerProfile.name}
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover object-top filter grayscale-[10%] contrast-[1.02]"
@@ -46,16 +51,16 @@ export default function AboutSection() {
 
               <div className="absolute bottom-6 left-6 right-6">
                 <span className="font-serif italic text-lg text-foreground block">
-                  Walaa Khalil Al-Adrah
+                  {language === "ar" ? designerProfile.arabicName : designerProfile.name}
                 </span>
                 <span className="text-[10px] tracking-[0.2em] uppercase text-secondary font-mono">
-                  Amman, Jordan · 3+ Years Experience
+                  {t.contact.locationValue} · {t.hero.experienceYears} {t.hero.yearsLabel}
                 </span>
               </div>
             </div>
 
             {/* Subtle decorative offset border */}
-            <div className="hidden sm:block absolute -bottom-4 -right-4 w-full h-full border border-gold/30 -z-10" />
+            <div className={`hidden sm:block absolute -bottom-4 ${isRTL ? "-left-4" : "-right-4"} w-full h-full border border-gold/30 -z-10`} />
           </motion.div>
 
           {/* Right Column: Biography & Architectural Pillars */}
@@ -67,16 +72,16 @@ export default function AboutSection() {
             className="lg:col-span-7 flex flex-col space-y-8"
           >
             <motion.p variants={fadeUp} className="font-serif text-2xl sm:text-3xl text-foreground font-light leading-snug">
-              {designerProfile.about.lead}
+              {language === "ar" ? designerProfile.about.leadAr : designerProfile.about.lead}
             </motion.p>
 
             <motion.p variants={fadeUp} className="text-base text-secondary font-light leading-relaxed">
-              {designerProfile.about.body}
+              {language === "ar" ? designerProfile.about.bodyAr : designerProfile.about.body}
             </motion.p>
 
             {/* 4 Core Pillars Grid */}
             <motion.div variants={fadeUp} className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-borderSubtle">
-              {designerProfile.about.pillars.map((pillar, idx) => (
+              {pillars.map((pillar, idx) => (
                 <div key={pillar.label} className="space-y-1.5">
                   <span className="text-[10px] font-mono text-gold tracking-widest block">
                     0{idx + 1}

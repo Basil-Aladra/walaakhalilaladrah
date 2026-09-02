@@ -3,8 +3,11 @@
 import { motion } from "framer-motion";
 import { designerProfile } from "@/data/profile";
 import { fadeUp, staggerContainer } from "@/lib/motion";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function PhilosophySection() {
+  const { t, language } = useLanguage();
+
   return (
     <section className="py-24 sm:py-36 px-6 sm:px-8 lg:px-12 bg-background relative overflow-hidden border-b border-borderSubtle bg-noise">
       <div className="max-w-6xl mx-auto">
@@ -18,7 +21,7 @@ export default function PhilosophySection() {
           {/* Section Indicator */}
           <motion.div variants={fadeUp} className="flex items-center gap-4">
             <span className="text-[11px] font-mono tracking-[0.25em] uppercase text-gold">
-              Philosophy & Vision
+              {t.philosophy.badge}
             </span>
             <div className="h-[1px] w-16 bg-gold/40" />
           </motion.div>
@@ -28,7 +31,7 @@ export default function PhilosophySection() {
             variants={fadeUp}
             className="font-serif text-3xl sm:text-5xl lg:text-6xl text-foreground font-normal leading-[1.2] tracking-tight max-w-5xl"
           >
-            &ldquo;{designerProfile.philosophy.quote}&rdquo;
+            &ldquo;{language === "ar" ? designerProfile.philosophy.quoteAr : designerProfile.philosophy.quote}&rdquo;
           </motion.blockquote>
 
           {/* Supporting Narrative */}
@@ -38,19 +41,19 @@ export default function PhilosophySection() {
           >
             <div className="md:col-span-4">
               <span className="font-serif italic text-xl text-foreground/80 block">
-                Balanced Spatial Sensibility
+                {t.philosophy.focusTitle}
               </span>
               <span className="text-xs text-secondary font-light uppercase tracking-widest mt-1 block">
-                Amman, Jordan
+                {t.hero.basedInValue}
               </span>
             </div>
 
-            <div className="md:col-span-8">
+            <div className="md:col-span-8 space-y-4">
               <p className="text-base sm:text-lg text-secondary font-light leading-relaxed">
-                {designerProfile.philosophy.description}
+                {language === "ar" ? designerProfile.philosophy.descriptionAr : designerProfile.philosophy.description}
               </p>
-              <p className="text-sm sm:text-base text-secondary/80 font-light leading-relaxed mt-4">
-                Every line, texture, and light source is considered in relation to how people move, rest, and gather—transforming functional floor plans into calm, sensory sanctuaries.
+              <p className="text-sm sm:text-base text-secondary/80 font-light leading-relaxed">
+                {t.philosophy.focusDesc}
               </p>
             </div>
           </motion.div>

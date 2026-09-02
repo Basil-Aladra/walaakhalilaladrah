@@ -2,12 +2,16 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Plus, Minus } from "lucide-react";
+import { ArrowRight, ArrowLeft, Plus, Minus } from "lucide-react";
 import { expertiseList } from "@/data/profile";
 import { fadeUp, staggerContainer } from "@/lib/motion";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ExpertiseSection() {
   const [activeItem, setActiveItem] = useState<string | null>("01");
+  const { t, language, isRTL } = useLanguage();
+
+  const ArrowIcon = isRTL ? ArrowLeft : ArrowRight;
 
   return (
     <section id="expertise" className="py-24 sm:py-36 px-6 sm:px-8 lg:px-12 bg-background relative border-b border-borderSubtle">
@@ -21,17 +25,24 @@ export default function ExpertiseSection() {
           className="mb-20"
         >
           <motion.span variants={fadeUp} className="text-[11px] font-mono tracking-[0.25em] uppercase text-gold block mb-3">
-            03 — Disciplines & Capabilities
+            03 — {t.expertise.badge}
           </motion.span>
           <motion.h2 variants={fadeUp} className="font-serif text-4xl sm:text-6xl text-foreground font-normal tracking-tight max-w-2xl">
-            Designing from concept to detail.
+            {t.expertise.title}
           </motion.h2>
+          <motion.p variants={fadeUp} className="text-base sm:text-lg text-secondary font-light mt-3 max-w-xl">
+            {t.expertise.subtitle}
+          </motion.p>
         </motion.div>
 
         {/* Editorial List with Horizontal Dividers */}
         <div className="border-t border-borderSubtle">
           {expertiseList.map((item) => {
             const isActive = activeItem === item.number;
+            const title = language === "ar" ? (item.titleAr || item.title) : item.title;
+            const subtitle = language === "ar" ? (item.subtitleAr || item.subtitle) : item.subtitle;
+            const description = language === "ar" ? (item.descriptionAr || item.description) : item.description;
+            const tags = language === "ar" ? (item.tagsAr || item.tags) : item.tags;
 
             return (
               <div
@@ -54,24 +65,24 @@ export default function ExpertiseSection() {
                   {/* Title & Subtitle */}
                   <div className="md:col-span-5 flex flex-col">
                     <div className="flex items-center gap-4">
-                      <h3 className="font-serif text-2xl sm:text-4xl text-foreground font-normal transition-transform duration-300 group-hover:translate-x-2 group-hover:text-gold">
-                        {item.title}
+                      <h3 className={`font-serif text-2xl sm:text-4xl text-foreground font-normal transition-transform duration-300 ${isRTL ? "group-hover:-translate-x-2" : "group-hover:translate-x-2"} group-hover:text-gold`}>
+                        {title}
                       </h3>
-                      <ArrowRight className="w-5 h-5 text-gold opacity-0 -translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 hidden sm:block" />
+                      <ArrowIcon className={`w-5 h-5 text-gold opacity-0 ${isRTL ? "translate-x-4" : "-translate-x-4"} transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 hidden sm:block`} />
                     </div>
                     <span className="text-xs uppercase tracking-widest text-secondary font-mono mt-1">
-                      {item.subtitle}
+                      {subtitle}
                     </span>
                   </div>
 
                   {/* Description & Tags */}
                   <div className={`md:col-span-5 transition-all duration-300 ${isActive ? "opacity-100 max-h-96" : "opacity-80 md:opacity-70"}`}>
                     <p className="text-sm sm:text-base text-secondary font-light leading-relaxed">
-                      {item.description}
+                      {description}
                     </p>
 
                     <div className="flex flex-wrap gap-2 mt-4">
-                      {item.tags.map((tag) => (
+                      {tags.map((tag) => (
                         <span
                           key={tag}
                           className="text-[10px] uppercase font-mono tracking-wider px-2.5 py-1 bg-foreground/[0.04] text-foreground/70 border border-borderSubtle"

@@ -5,26 +5,31 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ArrowLeft } from "lucide-react";
+import { ArrowUpRight, ArrowLeft, ArrowRight } from "lucide-react";
 import { projects } from "@/data/projects";
 import { fadeUp, staggerContainer } from "@/lib/motion";
+import { useLanguage } from "@/context/LanguageContext";
 
-const categories = [
-  "All",
-  "Student Projects",
-  "Interior Design",
-  "Working Drawing",
-  "3D Visualization",
-  "Furniture Design",
+const categoryKeys = [
+  { key: "All", en: "All", ar: "جميع المشاريع" },
+  { key: "Student Projects", en: "Student Projects", ar: "مشاريع التخرج والجامعة" },
+  { key: "Interior Design", en: "Interior Design", ar: "التصميم الداخلي" },
+  { key: "Working Drawing", en: "Working Drawing", ar: "المخططات التنفيذية" },
+  { key: "3D Visualization", en: "3D Visualization", ar: "الإظهار المعماري 3D" },
+  { key: "Furniture Design", en: "Furniture Design", ar: "تصميم الأثاث" },
 ];
 
 function ProjectsContent() {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get("category");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const { t, language, isRTL } = useLanguage();
+
+  const ArrowBackIcon = isRTL ? ArrowRight : ArrowLeft;
+  const ArrowOpenIcon = ArrowUpRight;
 
   useEffect(() => {
-    if (initialCategory && categories.includes(initialCategory)) {
+    if (initialCategory && categoryKeys.some((c) => c.key === initialCategory)) {
       setSelectedCategory(initialCategory);
     } else {
       setSelectedCategory("All");
@@ -43,8 +48,8 @@ function ProjectsContent() {
           href="/"
           className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-secondary hover:text-gold transition-colors"
         >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to Home</span>
+          <ArrowBackIcon className="w-4 h-4" />
+          <span>{language === "ar" ? "العودة للرئيسية" : "Back to Home"}</span>
         </Link>
       </div>
 
@@ -56,33 +61,34 @@ function ProjectsContent() {
         className="mb-16 pb-8 border-b border-borderSubtle"
       >
         <motion.span variants={fadeUp} className="text-[11px] font-mono tracking-[0.25em] uppercase text-gold block mb-3">
-          Portfolio Archive
+          {t.projectsArchive.badge}
         </motion.span>
         <motion.h1 variants={fadeUp} className="font-serif text-5xl sm:text-7xl text-foreground font-normal tracking-tight">
-          Selected Works
+          {t.projectsArchive.title}
         </motion.h1>
         <motion.p variants={fadeUp} className="text-base sm:text-lg text-secondary font-light max-w-2xl mt-4">
-          An archive of student projects, interior architecture, technical working drawings, 3D visualizations, and bespoke furniture designs.
+          {t.projectsArchive.subtitle}
         </motion.p>
       </motion.div>
 
       {/* Category Filters */}
       <div className="flex flex-wrap gap-2 sm:gap-3 mb-16 pb-6 border-b border-borderSubtle">
-        {categories.map((cat) => {
-          const isSelected = selectedCategory === cat;
-          const count = cat === "All" ? projects.length : projects.filter((p) => p.category === cat).length;
+        {categoryKeys.map((cat) => {
+          const isSelected = selectedCategory === cat.key;
+          const count = cat.key === "All" ? projects.length : projects.filter((p) => p.category === cat.key).length;
+          const label = language === "ar" ? cat.ar : cat.en;
 
           return (
             <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
+              key={cat.key}
+              onClick={() => setSelectedCategory(cat.key)}
               className={`px-4 py-2 text-xs font-mono uppercase tracking-widest transition-all duration-300 border ${
                 isSelected
                   ? "bg-foreground text-background border-foreground shadow-sm"
                   : "bg-background/80 hover:bg-foreground/[0.04] text-foreground/70 border-borderSubtle"
               }`}
             >
-              {cat} ({count})
+              {label} ({count})
             </button>
           );
         })}
@@ -98,50 +104,57 @@ function ProjectsContent() {
           transition={{ duration: 0.4 }}
           className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16"
         >
-          {filteredProjects.map((project) => (
-            <article key={project.id} className="group">
-              <Link href={`/projects/${project.slug}`} className="block">
-                <div className="relative w-full h-[50vh] sm:h-[58vh] overflow-hidden bg-[#E9E4DC] border border-borderSubtle">
-                  <Image
-                    src={project.thumbnail}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-105"
-                  />
-                  <div className="absolute top-6 left-6 z-10">
-                    <span className="font-serif text-3xl sm:text-5xl text-white/90 font-light drop-shadow-sm">
-                      {project.number}
-                    </span>
-                  </div>
+          {filteredProjects.map((project) => {
+            const title = language === "ar" ? (project.titleAr || project.title) : project.title;
+            const category = language === "ar" ? (project.categoryAr || project.category) : project.category;
+            const location = language === "ar" ? (project.locationAr || project.location) : project.location;
+            const tagline = language === "ar" ? (project.taglineAr || project.tagline) : project.tagline;
 
-                  <div className="absolute bottom-6 right-6 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="px-3.5 py-1.5 bg-background/90 backdrop-blur-md text-foreground text-xs uppercase tracking-widest flex items-center gap-1.5">
-                      <span>Read Case Study</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
+            return (
+              <article key={project.id} className="group">
+                <Link href={`/projects/${project.slug}`} className="block">
+                  <div className="relative w-full h-[50vh] sm:h-[58vh] overflow-hidden bg-[#E9E4DC] border border-borderSubtle">
+                    <Image
+                      src={project.thumbnail}
+                      alt={title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-105"
+                    />
+                    <div className={`absolute top-6 ${isRTL ? "right-6" : "left-6"} z-10`}>
+                      <span className="font-serif text-3xl sm:text-5xl text-white/90 font-light drop-shadow-sm">
+                        {project.number}
+                      </span>
+                    </div>
+
+                    <div className={`absolute bottom-6 ${isRTL ? "left-6" : "right-6"} z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
+                      <div className="px-3.5 py-1.5 bg-background/90 backdrop-blur-md text-foreground text-xs uppercase tracking-widest flex items-center gap-1.5">
+                        <span>{t.selectedWorks.viewCaseStudy}</span>
+                        <ArrowOpenIcon className={`w-3.5 h-3.5 ${isRTL ? "rotate-[-90deg]" : ""}`} />
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="pt-6">
-                  <div className="flex items-baseline justify-between">
-                    <h2 className="font-serif text-2xl sm:text-3xl text-foreground font-normal group-hover:text-gold transition-colors duration-300">
-                      {project.title}
-                    </h2>
-                    <span className="text-xs font-mono text-secondary">{project.year}</span>
+                  <div className="pt-6">
+                    <div className="flex items-baseline justify-between">
+                      <h2 className="font-serif text-2xl sm:text-3xl text-foreground font-normal group-hover:text-gold transition-colors duration-300">
+                        {title}
+                      </h2>
+                      <span className="text-xs font-mono text-secondary">{project.year}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-xs text-secondary font-light mt-1.5 uppercase tracking-wider font-mono">
+                      <span>{category}</span>
+                      <span>·</span>
+                      <span>{location}</span>
+                    </div>
+                    <p className="text-sm text-secondary font-light mt-3">
+                      {tagline}
+                    </p>
                   </div>
-                  <div className="flex items-center gap-3 text-xs text-secondary font-light mt-1.5 uppercase tracking-wider font-mono">
-                    <span>{project.category}</span>
-                    <span>·</span>
-                    <span>{project.location}</span>
-                  </div>
-                  <p className="text-sm text-secondary font-light mt-3">
-                    {project.tagline}
-                  </p>
-                </div>
-              </Link>
-            </article>
-          ))}
+                </Link>
+              </article>
+            );
+          })}
         </motion.div>
       </AnimatePresence>
     </div>

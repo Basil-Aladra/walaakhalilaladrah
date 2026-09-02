@@ -5,9 +5,11 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { materialsShowcase } from "@/data/profile";
 import { fadeUp, staggerContainer } from "@/lib/motion";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function MaterialsSection() {
   const [selectedMaterial, setSelectedMaterial] = useState(materialsShowcase[0]);
+  const { t, language } = useLanguage();
 
   return (
     <section id="materials" className="py-24 sm:py-36 px-6 sm:px-8 lg:px-12 bg-background relative overflow-hidden border-b border-borderSubtle bg-noise">
@@ -21,13 +23,13 @@ export default function MaterialsSection() {
           className="mb-16"
         >
           <motion.span variants={fadeUp} className="text-[11px] font-mono tracking-[0.25em] uppercase text-gold block mb-3">
-            04 — Materiality & Textures
+            04 — {t.materials.badge}
           </motion.span>
           <motion.h2 variants={fadeUp} className="font-serif text-4xl sm:text-6xl text-foreground font-normal tracking-tight">
-            Material / Light / Texture
+            {t.materials.title}
           </motion.h2>
           <motion.p variants={fadeUp} className="text-sm sm:text-base text-secondary font-light max-w-2xl mt-4">
-            Curating authentic architectural finishes that interact gracefully with natural daylight, age with dignity, and enrich the tactile human experience.
+            {t.materials.subtitle}
           </motion.p>
         </motion.div>
 
@@ -37,11 +39,14 @@ export default function MaterialsSection() {
           <div className="lg:col-span-4 flex flex-col space-y-3">
             {materialsShowcase.map((mat) => {
               const isSelected = selectedMaterial.id === mat.id;
+              const name = language === "ar" ? (mat.nameAr || mat.name) : mat.name;
+              const subtitle = language === "ar" ? (mat.subtitleAr || mat.subtitle) : mat.subtitle;
+
               return (
                 <button
                   key={mat.id}
                   onClick={() => setSelectedMaterial(mat)}
-                  className={`text-left p-5 transition-all duration-300 border ${
+                  className={`text-left rtl:text-right p-5 transition-all duration-300 border ${
                     isSelected
                       ? "bg-foreground text-background border-foreground shadow-sm"
                       : "bg-background/60 hover:bg-foreground/[0.04] text-foreground border-borderSubtle"
@@ -49,9 +54,9 @@ export default function MaterialsSection() {
                 >
                   <div className="flex items-baseline justify-between mb-1">
                     <span className="font-serif text-lg sm:text-xl font-medium">
-                      {mat.name}
+                      {name}
                     </span>
-                    <div className="flex gap-1.5 ml-2">
+                    <div className="flex gap-1.5 ml-2 rtl:mr-2 rtl:ml-0">
                       {mat.palette.map((color, cIdx) => (
                         <span
                           key={cIdx}
@@ -66,7 +71,7 @@ export default function MaterialsSection() {
                       isSelected ? "text-gold-light" : "text-secondary"
                     }`}
                   >
-                    {mat.subtitle}
+                    {subtitle}
                   </span>
                 </button>
               );
@@ -78,7 +83,7 @@ export default function MaterialsSection() {
             <div className="relative w-full h-[400px] sm:h-[500px] overflow-hidden bg-foreground/5 mb-6">
               <Image
                 src={selectedMaterial.textureImage}
-                alt={selectedMaterial.name}
+                alt={language === "ar" ? (selectedMaterial.nameAr || selectedMaterial.name) : selectedMaterial.name}
                 fill
                 sizes="(max-width: 1024px) 100vw, 65vw"
                 className="object-cover object-center transition-all duration-700 hover:scale-105"
@@ -86,22 +91,22 @@ export default function MaterialsSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 text-white">
                 <span className="text-[10px] font-mono tracking-widest uppercase text-gold-light block mb-1">
-                  Architectural Sample
+                  {t.materials.colorStory}
                 </span>
                 <span className="font-serif text-2xl font-light">
-                  {selectedMaterial.name}
+                  {language === "ar" ? (selectedMaterial.nameAr || selectedMaterial.name) : selectedMaterial.name}
                 </span>
               </div>
             </div>
 
             <div className="space-y-4">
               <p className="text-base sm:text-lg text-foreground font-light leading-relaxed">
-                {selectedMaterial.description}
+                {language === "ar" ? (selectedMaterial.descriptionAr || selectedMaterial.description) : selectedMaterial.description}
               </p>
 
               <div className="flex items-center gap-4 pt-2">
                 <span className="text-xs uppercase font-mono tracking-wider text-secondary">
-                  Tonal Spectrum:
+                  {t.materials.colorStory}:
                 </span>
                 <div className="flex items-center gap-2">
                   {selectedMaterial.palette.map((hex) => (

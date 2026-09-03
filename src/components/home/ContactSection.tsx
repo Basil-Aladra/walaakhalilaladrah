@@ -21,7 +21,7 @@ export default function ContactSection() {
           className="mb-20 text-center max-w-3xl mx-auto"
         >
           <motion.span variants={fadeUp} className="text-[11px] font-mono tracking-[0.25em] uppercase text-gold-light block mb-3">
-            09 — {t.contact.badge}
+            08 — {t.contact.badge}
           </motion.span>
           <motion.h2 variants={fadeUp} className="font-serif text-4xl sm:text-6xl lg:text-7xl text-background font-normal tracking-tight">
             {t.contact.title}

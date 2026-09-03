@@ -4,7 +4,6 @@ import SelectedWorks from "@/components/home/SelectedWorks";
 import AboutSection from "@/components/home/AboutSection";
 import ExpertiseSection from "@/components/home/ExpertiseSection";
 import MaterialsSection from "@/components/home/MaterialsSection";
-import VisualizationSection from "@/components/home/VisualizationSection";
 import ExperienceSection from "@/components/home/ExperienceSection";
 import ProcessSection from "@/components/home/ProcessSection";
 import SkillsSection from "@/components/home/SkillsSection";
@@ -31,19 +30,16 @@ export default function HomePage() {
       {/* 6. Materials & Tactility */}
       <MaterialsSection />
 
-      {/* 7. 3D Visualization */}
-      <VisualizationSection />
-
-      {/* 8. Professional Experience & Education */}
+      {/* 7. Professional Experience & Education */}
       <ExperienceSection />
 
-      {/* 9. Methodology & Process */}
+      {/* 8. Methodology & Process */}
       <ProcessSection />
 
-      {/* 10. Technical & Soft Skills */}
+      {/* 9. Technical & Soft Skills */}
       <SkillsSection />
 
-      {/* 11. Contact & Inquiries */}
+      {/* 10. Contact & Inquiries */}
       <ContactSection />
     </div>
   );

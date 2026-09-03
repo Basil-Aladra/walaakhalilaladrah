@@ -98,10 +98,7 @@ export default function Footer() {
               </a>
             </div>
 
-            <div className="space-y-3">
-              <p className="text-xs text-background/40 font-light">
-                {t.contact.availabilityStatus}
-              </p>
+            <div>
               <LanguageSwitcher variant="pill" className="border-background/20" />
             </div>
           </div>

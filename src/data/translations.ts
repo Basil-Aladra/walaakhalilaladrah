@@ -501,7 +501,7 @@ export const translations: Record<Language, Translations> = {
       badge: "تواصل معي",
       title: "لنصمم معاً مساحات ملهمة",
       subtitle: "متاحة للمشاريع السكنية والتجارية وتصميم الأثاث الخارجي والتعاون المهني.",
-      availability: "الحالة الحالية",
+      availability: " ",
       availabilityStatus: "متاحة لتلقي المشاريع والفرص المهنية",
       phoneLabel: "رقم الهاتف",
       emailLabel: "البريد الإلكتروني",

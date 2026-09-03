@@ -164,28 +164,12 @@ export default function ContactSection() {
               </p>
             </div>
 
-            <div className="py-3 px-4 bg-white/[0.04] border border-white/10 flex items-center justify-between text-xs font-mono text-gold-light">
-              <span className="uppercase tracking-widest">{t.contact.availability}</span>
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            </div>
+
           </motion.div>
         </div>
 
         {/* Bottom Banner */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.8 }}
-          className="p-8 bg-white/[0.02] border border-white/10 text-center max-w-3xl mx-auto"
-        >
-          <span className="text-xs font-serif italic text-gold-light block mb-2">
-            {t.contact.availability}
-          </span>
-          <p className="text-sm text-background/70 font-light leading-relaxed">
-            {t.contact.availabilityStatus}
-          </p>
-        </motion.div>
+
       </div>
     </section>
   );

@@ -11,10 +11,11 @@ export const designerProfile = {
   experienceYearsAr: "+3",
   location: "Amman — Marj Al Hammam, Jordan",
   locationAr: "عَمّان — مرج الحمام، الأردن",
-  phone: "+962 791080038",
+  phone: "+962 7 9108 0038",
   email: "walaa1998aladrah@gmail.com",
   socials: {
-    instagram: "https://instagram.com",
+    instagram: "https://www.instagram.com/interiorsdesignw.kh?igsi=MXh4ZmhrZGZpMzd0Zw==",
+    whatsapp: "https://wa.me/962791080038",
     linkedin: "https://linkedin.com",
   },
   hero: {

@@ -20,7 +20,7 @@ export default function SkillsSection() {
           className="mb-20"
         >
           <motion.span variants={fadeUp} className="text-[11px] font-mono tracking-[0.25em] uppercase text-gold block mb-3">
-            07 — {t.skills.badge}
+            06 — {t.skills.badge}
           </motion.span>
           <motion.h2 variants={fadeUp} className="font-serif text-4xl sm:text-6xl text-foreground font-normal tracking-tight">
             {t.skills.title}

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Instagram, MessageSquare } from "lucide-react";
 import { designerProfile } from "@/data/profile";
 import { useLanguage } from "@/context/LanguageContext";
 import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
@@ -27,9 +27,29 @@ export default function Footer() {
               </p>
             </div>
 
-            <div className="text-xs text-background/50 space-y-1">
-              <p>{t.contact.locationValue}</p>
-              <p className="text-gold/90">{designerProfile.phone}</p>
+            <div className="flex items-center gap-4">
+              <a
+                href={designerProfile.socials.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center text-gold-light hover:bg-gold hover:text-white hover:border-gold transition-all duration-300"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a
+                href={designerProfile.socials.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center text-gold-light hover:bg-gold hover:text-white hover:border-gold transition-all duration-300"
+                aria-label="WhatsApp"
+              >
+                <MessageSquare className="w-4 h-4" />
+              </a>
+              <div className="text-xs text-background/60">
+                <p>{t.contact.locationValue}</p>
+                <p className="text-gold/90 font-mono">{designerProfile.phone}</p>
+              </div>
             </div>
           </div>
 
@@ -51,14 +71,14 @@ export default function Footer() {
               <Link href="/#expertise" className="text-background/70 hover:text-gold transition-colors">
                 {t.nav.expertise}
               </Link>
-              <Link href="/#materials" className="text-background/70 hover:text-gold transition-colors">
-                {t.materials.title}
-              </Link>
               <Link href="/#experience" className="text-background/70 hover:text-gold transition-colors">
                 {t.nav.experience}
               </Link>
               <Link href="/#process" className="text-background/70 hover:text-gold transition-colors">
                 {t.nav.process}
+              </Link>
+              <Link href="/#contact" className="text-background/70 hover:text-gold transition-colors">
+                {t.nav.contact}
               </Link>
             </div>
           </div>

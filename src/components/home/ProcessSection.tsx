@@ -20,7 +20,7 @@ export default function ProcessSection() {
           className="mb-20"
         >
           <motion.span variants={fadeUp} className="text-[11px] font-mono tracking-[0.25em] uppercase text-gold block mb-3">
-            06 — {t.process.badge}
+            05 — {t.process.badge}
           </motion.span>
           <motion.h2 variants={fadeUp} className="font-serif text-4xl sm:text-6xl text-foreground font-normal tracking-tight">
             {t.process.title}
